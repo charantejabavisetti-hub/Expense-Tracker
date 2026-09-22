@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Add Expense - Expense Tracker</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            Expense Tracker
+        </div>
+
+        <nav>
+
+            <a href="user-dashboard.html">
+                Dashboard
+            </a>
+
+            <button
+                onclick="logout()"
+                class="logout-btn">
+
+                Logout
+
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ADD EXPENSE FORM -->
+
+    <main class="auth-container">
+
+        <div class="auth-card">
+
+            <h1>Add Expense</h1>
+
+            <p class="auth-subtitle">
+                Record your expense details below.
+            </p>
+
+
+            <form id="expenseForm">
+
+
+                <!-- Amount -->
+
+                <div class="form-group">
+
+                    <label for="expenseAmount">
+                        Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="expenseAmount"
+                        placeholder="Enter amount"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Category -->
+
+                <div class="form-group">
+
+                    <label for="expenseCategory">
+                        Expense Category
+                    </label>
+
+                    <select
+                        id="expenseCategory"
+                        required>
+
+                        <option value="">
+                            Select category
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Date -->
+
+                <div class="form-group">
+
+                    <label for="expenseDate">
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="expenseDate"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="form-group">
+
+                    <label for="expenseDescription">
+                        Description
+                    </label>
+
+                    <input
+                        type="text"
+                        id="expenseDescription"
+                        placeholder="Example: Monthly grocery shopping"
+                    >
+
+                </div>
+
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    class="auth-btn">
+
+                    Add Expense
+
+                </button>
+
+
+                <p id="expenseMessage"></p>
+
+            </form>
+
+
+            <!-- Back -->
+
+            <p class="auth-footer">
+
+                <a href="user-dashboard.html">
+                    ← Back to Dashboard
+                </a>
+
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- MAIN DASHBOARD JAVASCRIPT -->
+
+    <script src="js/dashboard.js"></script>
+
+
+    <!-- DYNAMIC CATEGORY JAVASCRIPT -->
+
+    <script>
+
+        const categorySelect =
+            document.getElementById("expenseCategory");
+
+
+        if (categorySelect) {
+
+            let categories =
+                JSON.parse(
+                    localStorage.getItem("categories")
+                );
+
+
+            // Default categories
+            // if Admin has not created categories yet
+
+            if (!categories) {
+
+                categories = [
+                    "Food",
+                    "Travel",
+                    "Shopping",
+                    "Bills",
+                    "Education",
+                    "Healthcare",
+                    "Entertainment",
+                    "Other"
+                ];
+
+            }
+
+
+            // Add categories to dropdown
+
+            categories.forEach(function(category) {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = category;
+
+                option.textContent = category;
+
+                categorySelect.appendChild(option);
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

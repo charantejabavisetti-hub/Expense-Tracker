@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>User Dashboard - Expense Tracker</title>
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            Expense Tracker
+        </div>
+
+        <div>
+
+            <span id="welcomeUser"></span>
+
+            <button
+                onclick="logout()"
+                class="logout-btn">
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         DASHBOARD
+    ========================== -->
+
+    <main class="dashboard">
+
+        <h1>Dashboard</h1>
+
+        <p>
+            Manage your income and expenses from here.
+        </p>
+
+
+        <!-- =========================
+             SUMMARY CARDS
+        ========================== -->
+
+        <section class="summary-grid">
+
+            <!-- Total Income -->
+
+            <div class="summary-card">
+
+                <h3>Total Income</h3>
+
+                <p id="totalIncome">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <!-- Total Expenses -->
+
+            <div class="summary-card">
+
+                <h3>Total Expenses</h3>
+
+                <p id="totalExpenses">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <!-- Balance -->
+
+            <div class="summary-card">
+
+                <h3>Balance</h3>
+
+                <p id="balance">
+                    ₹0
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MODULES
+        ========================== -->
+
+        <section class="module-grid">
+
+
+            <!-- Add Income -->
+
+            <a
+                href="add-income.html"
+                class="module-card">
+
+                <h2>💰 Add Income</h2>
+
+                <p>
+                    Add your income details.
+                </p>
+
+            </a>
+
+
+            <!-- Add Expense -->
+
+           <a href="add-expense.html" class="module-card">
+
+    <h2>💸 Add Expense</h2>
+
+    <p>Record your daily expenses.</p>
+
+</a>
+
+
+            <!-- Transactions -->
+
+           <a href="transactions.html" class="module-card">
+
+    <h2>📋 Transactions</h2>
+
+    <p>
+        View all your transactions.
+    </p>
+
+</a>
+
+            <!-- Budget -->
+
+            <a href="budget.html" class="module-card">
+    <h2>🎯 Budget</h2>
+    <p>Manage your monthly budget.</p>
+</a>
+
+
+            <!-- Reports -->
+
+           <a href="reports.html" class="module-card">
+    <h2>📊 Reports</h2>
+    <p>View your spending reports.</p>
+</a>
+
+        </section>
+
+
+        <!-- =========================
+             RECENT TRANSACTIONS
+        ========================== -->
+
+        <section class="transactions">
+
+            <h2>
+                Recent Transactions
+            </h2>
+
+            <p id="noTransactions">
+                No transactions available.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

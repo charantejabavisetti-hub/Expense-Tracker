@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Categories - Expense Tracker</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        .navbar {
+            background: #222;
+            color: white;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .logout-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dashboard {
+            padding: 30px;
+        }
+
+        .category-box {
+            background: white;
+            padding: 25px;
+            margin-top: 25px;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+
+        input {
+            padding: 12px;
+            width: 65%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-btn {
+            background: #222;
+            color: white;
+        }
+
+        .category-list {
+            margin-top: 25px;
+        }
+
+        .category-item {
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #f1f1f1;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            Expense Tracker - Admin
+        </div>
+
+        <div>
+            <a href="admin-dashboard.html">Dashboard</a>
+
+            <button onclick="adminLogout()" class="logout-btn">
+                Logout
+            </button>
+        </div>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <h1>📂 Manage Categories</h1>
+
+        <p>
+            Add and manage expense categories.
+        </p>
+
+
+        <div class="category-box">
+
+            <h2>Add Category</h2>
+
+            <input
+                type="text"
+                id="categoryName"
+                placeholder="Enter category name"
+            >
+
+            <button
+                onclick="addCategory()"
+                class="add-btn"
+            >
+                Add Category
+            </button>
+
+
+            <div class="category-list">
+
+                <h2>Available Categories</h2>
+
+                <div id="categoryList"></div>
+
+            </div>
+
+        </div>
+
+
+        <br>
+
+        <a href="admin-dashboard.html">
+            ← Back to Admin Dashboard
+        </a>
+
+    </main>
+
+
+    <script>
+
+        // ===============================
+        // ADMIN LOGIN CHECK
+        // ===============================
+
+        const currentUser =
+            JSON.parse(localStorage.getItem("currentUser"));
+
+
+        if (!currentUser || currentUser.role !== "admin") {
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // ===============================
+        // LOGOUT
+        // ===============================
+
+        function adminLogout() {
+
+            localStorage.removeItem("currentUser");
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // ===============================
+        // LOAD CATEGORIES
+        // ===============================
+
+        let categories =
+            JSON.parse(localStorage.getItem("categories"));
+
+
+        if (!categories) {
+
+            categories = [
+                "Food",
+                "Travel",
+                "Shopping",
+                "Bills",
+                "Education",
+                "Healthcare",
+                "Entertainment",
+                "Other"
+            ];
+
+            localStorage.setItem(
+                "categories",
+                JSON.stringify(categories)
+            );
+
+        }
+
+
+        // ===============================
+        // DISPLAY CATEGORIES
+        // ===============================
+
+        function displayCategories() {
+
+            const categoryList =
+                document.getElementById("categoryList");
+
+            categoryList.innerHTML = "";
+
+
+            categories.forEach(function(category) {
+
+                const item =
+                    document.createElement("div");
+
+                item.className =
+                    "category-item";
+
+                item.textContent =
+                    "📁 " + category;
+
+                categoryList.appendChild(item);
+
+            });
+
+        }
+
+
+        // ===============================
+        // ADD CATEGORY
+        // ===============================
+
+        function addCategory() {
+
+            const input =
+                document.getElementById("categoryName");
+
+            const category =
+                input.value.trim();
+
+
+            if (category === "") {
+
+                alert("Please enter a category.");
+
+                return;
+
+            }
+
+
+            if (categories.includes(category)) {
+
+                alert("Category already exists.");
+
+                return;
+
+            }
+
+
+            categories.push(category);
+
+
+            localStorage.setItem(
+                "categories",
+                JSON.stringify(categories)
+            );
+
+
+            input.value = "";
+
+
+            displayCategories();
+
+        }
+
+
+        // ===============================
+        // INITIAL DISPLAY
+        // ===============================
+
+        displayCategories();
+
+    </script>
+
+</body>
+
+</html>

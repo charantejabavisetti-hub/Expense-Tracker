@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - Expense Tracker</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            Expense Tracker - Admin
+        </div>
+
+        <nav>
+
+            <span id="adminWelcome"></span>
+
+            <button
+                onclick="adminLogout()"
+                class="logout-btn">
+
+                Logout
+
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <h1>Admin Dashboard</h1>
+
+        <p>
+            Manage users and monitor expense tracker activities.
+        </p>
+
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <h3>Total Users</h3>
+
+                <p id="totalUsers">0</p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>Total Transactions</h3>
+
+                <p id="totalTransactions">0</p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>Total Expenses</h3>
+
+                <p id="adminTotalExpenses">₹0</p>
+
+            </div>
+
+        </section>
+
+
+        <section class="module-grid">
+
+
+            <a href="admin-users.html"
+                class="module-card">
+
+                <h2>👥 Users</h2>
+
+                <p>
+                    View registered users.
+                </p>
+
+            </a>
+
+
+            <a href="admin-transactions.html"
+                class="module-card">
+
+                <h2>💰 Transactions</h2>
+
+                <p>
+                    Monitor user transactions.
+                </p>
+
+            </a>
+
+
+            <a href="admin-categories.html"
+                class="module-card">
+
+                <h2>📂 Categories</h2>
+
+                <p>
+                    Manage expense categories.
+                </p>
+
+            </a>
+
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+
+        // Show Admin Name
+
+        const currentUser =
+            JSON.parse(
+                localStorage.getItem("currentUser")
+            );
+
+
+        // Admin-only access
+
+        if (!currentUser ||
+            currentUser.role !== "admin") {
+
+            window.location.href = "login.html";
+
+        } else {
+
+            document
+                .getElementById("adminWelcome")
+                .textContent =
+                "Welcome, " + currentUser.name;
+
+        }
+
+
+        // Logout
+
+        function adminLogout() {
+
+            localStorage.removeItem("currentUser");
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // Load Users
+
+        const users =
+            JSON.parse(
+                localStorage.getItem("users")
+            ) || [];
+
+
+        const normalUsers =
+            users.filter(function(user) {
+
+                return user.role === "user";
+
+            });
+
+
+        document
+            .getElementById("totalUsers")
+            .textContent =
+            normalUsers.length;
+
+
+        // Load Transactions
+
+        const transactions =
+            JSON.parse(
+                localStorage.getItem("transactions")
+            ) || [];
+
+
+        document
+            .getElementById("totalTransactions")
+            .textContent =
+            transactions.length;
+
+
+        // Calculate Total Expenses
+
+        let totalExpenses = 0;
+
+
+        transactions.forEach(function(transaction) {
+
+            if (transaction.type === "expense") {
+
+                totalExpenses +=
+                    Number(transaction.amount);
+
+            }
+
+        });
+
+
+        document
+            .getElementById("adminTotalExpenses")
+            .textContent =
+            "₹" +
+            totalExpenses.toLocaleString("en-IN");
+
+
+    </script>
+
+</body>
+
+</html>

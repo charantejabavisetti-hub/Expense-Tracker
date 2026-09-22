@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Budget - Expense Tracker</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            Expense Tracker
+        </div>
+
+        <nav>
+            <a href="user-dashboard.html">Dashboard</a>
+
+            <button onclick="logout()" class="logout-btn">
+                Logout
+            </button>
+        </nav>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <h1>Monthly Budget</h1>
+
+        <p>
+            Set and manage your monthly spending budget.
+        </p>
+
+
+        <!-- Budget Form -->
+
+        <section class="transactions">
+
+            <h2>Set Budget</h2>
+
+            <form id="budgetForm">
+
+                <div class="form-group">
+
+                    <label for="budgetAmount">
+                        Monthly Budget Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="budgetAmount"
+                        placeholder="Enter budget amount"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+
+                <button type="submit" class="auth-btn">
+                    Set Budget
+                </button>
+
+                <p id="budgetMessage"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- Budget Summary -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <h3>Monthly Budget</h3>
+
+                <p id="monthlyBudget">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>Total Expenses</h3>
+
+                <p id="budgetExpenses">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>Remaining Budget</h3>
+
+                <p id="remainingBudget">
+                    ₹0
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Warning -->
+
+        <section class="transactions">
+
+            <p id="budgetStatus">
+                No budget set yet.
+            </p>
+
+        </section>
+
+
+        <p class="auth-footer">
+
+            <a href="user-dashboard.html">
+                ← Back to Dashboard
+            </a>
+
+        </p>
+
+    </main>
+
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

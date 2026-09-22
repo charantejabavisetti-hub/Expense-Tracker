@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reports - Expense Tracker</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <style>
+        .report-section {
+            margin-top: 30px;
+        }
+
+        .category-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+
+        .category-row strong {
+            font-size: 16px;
+        }
+
+        .category-row span {
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- Navbar -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            Expense Tracker
+        </div>
+
+        <nav>
+
+            <a href="user-dashboard.html">
+                Dashboard
+            </a>
+
+            <button onclick="logout()" class="logout-btn">
+                Logout
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Main Content -->
+
+    <main class="dashboard">
+
+        <h1>📊 Expense Reports</h1>
+
+        <p>
+            View your income, expenses and spending categories.
+        </p>
+
+
+        <!-- Summary -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <h3>Total Income</h3>
+
+                <p id="reportIncome">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>Total Expenses</h3>
+
+                <p id="reportExpenses">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>Balance</h3>
+
+                <p id="reportBalance">
+                    ₹0
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Category Report -->
+
+        <section class="transactions report-section">
+
+            <h2>Expense Categories</h2>
+
+            <div id="categoryReport">
+
+                <p>
+                    No expense data available.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Back -->
+
+        <a href="user-dashboard.html" class="back-link">
+            ← Back to Dashboard
+        </a>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

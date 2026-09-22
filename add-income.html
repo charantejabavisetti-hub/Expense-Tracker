@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Income - Expense Tracker</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            Expense Tracker
+        </div>
+
+
+        <nav>
+
+            <a href="user-dashboard.html">
+                Dashboard
+            </a>
+
+            <button
+                onclick="logout()"
+                class="logout-btn">
+
+                Logout
+
+            </button>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ADD INCOME -->
+
+    <main class="auth-container">
+
+
+        <div class="auth-card">
+
+
+            <h1>Add Income</h1>
+
+
+            <p class="auth-subtitle">
+
+                Add your income details below.
+
+            </p>
+
+
+
+            <form id="incomeForm">
+
+
+                <!-- AMOUNT -->
+
+                <div class="form-group">
+
+                    <label for="incomeAmount">
+
+                        Amount
+
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="incomeAmount"
+                        placeholder="Enter amount"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- SOURCE -->
+
+                <div class="form-group">
+
+                    <label for="incomeSource">
+
+                        Income Source
+
+                    </label>
+
+
+                    <select
+                        id="incomeSource"
+                        required>
+
+                        <option value="">
+                            Select income source
+                        </option>
+
+                        <option value="Salary">
+                            Salary
+                        </option>
+
+                        <option value="Freelance">
+                            Freelance
+                        </option>
+
+                        <option value="Business">
+                            Business
+                        </option>
+
+                        <option value="Scholarship">
+                            Scholarship
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DATE -->
+
+                <div class="form-group">
+
+                    <label for="incomeDate">
+
+                        Date
+
+                    </label>
+
+
+                    <input
+                        type="date"
+                        id="incomeDate"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="incomeDescription">
+
+                        Description
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="incomeDescription"
+                        placeholder="Example: September salary"
+                    >
+
+                </div>
+
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="auth-btn">
+
+                    Add Income
+
+                </button>
+
+
+
+                <!-- MESSAGE -->
+
+                <p id="incomeMessage"></p>
+
+
+            </form>
+
+
+
+            <p class="auth-footer">
+
+                <a href="user-dashboard.html">
+
+                    ← Back to Dashboard
+
+                </a>
+
+            </p>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <script src="js/app.js"></script>
+
+
+    <script src="js/dashboard.js"></script>
+
+
+</body>
+
+</html>

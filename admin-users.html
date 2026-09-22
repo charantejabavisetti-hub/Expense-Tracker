@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Users - Expense Tracker</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <style>
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .users-table th,
+        .users-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .users-table th {
+            background: #f5f5f5;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            Expense Tracker - Admin
+        </div>
+
+        <nav>
+
+            <a href="admin-dashboard.html">
+                Dashboard
+            </a>
+
+            <button onclick="adminLogout()" class="logout-btn">
+                Logout
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <h1>👥 Manage Users</h1>
+
+        <p>
+            View all registered users in the Expense Tracker.
+        </p>
+
+
+        <section class="transactions">
+
+            <table class="users-table">
+
+                <thead>
+
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="usersTableBody">
+
+                </tbody>
+
+            </table>
+
+
+            <p id="noUsers">
+                No users registered.
+            </p>
+
+        </section>
+
+
+        <p class="auth-footer">
+
+            <a href="admin-dashboard.html">
+                ← Back to Admin Dashboard
+            </a>
+
+        </p>
+
+    </main>
+
+
+    <script>
+
+        const currentUser =
+            JSON.parse(localStorage.getItem("currentUser"));
+
+
+        if (!currentUser || currentUser.role !== "admin") {
+
+            window.location.href = "login.html";
+
+        }
+
+
+        function adminLogout() {
+
+            localStorage.removeItem("currentUser");
+
+            window.location.href = "login.html";
+
+        }
+
+
+        const users =
+            JSON.parse(localStorage.getItem("users")) || [];
+
+
+        const normalUsers =
+            users.filter(function(user) {
+
+                return user.role === "user";
+
+            });
+
+
+        const tableBody =
+            document.getElementById("usersTableBody");
+
+
+        const noUsers =
+            document.getElementById("noUsers");
+
+
+        if (normalUsers.length === 0) {
+
+            noUsers.style.display = "block";
+
+        } else {
+
+            noUsers.style.display = "none";
+
+
+            normalUsers.forEach(function(user, index) {
+
+                const row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role}</td>
+                `;
+
+
+                tableBody.appendChild(row);
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

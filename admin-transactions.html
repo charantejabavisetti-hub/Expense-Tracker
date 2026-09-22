@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Transactions - Expense Tracker</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        .navbar {
+            background: #222;
+            color: white;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .logout-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dashboard {
+            padding: 30px;
+        }
+
+        .transaction-box {
+            background: white;
+            padding: 20px;
+            margin-top: 25px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #eee;
+        }
+
+        .no-data {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            Expense Tracker - Admin
+        </div>
+
+        <div>
+            <a href="admin-dashboard.html">
+                Dashboard
+            </a>
+
+            <button onclick="adminLogout()" class="logout-btn">
+                Logout
+            </button>
+        </div>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <h1>💰 All Transactions</h1>
+
+        <p>
+            Monitor all income and expense transactions.
+        </p>
+
+
+        <div class="transaction-box">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>S.No</th>
+                        <th>User Email</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="adminTransactionTableBody">
+
+                </tbody>
+
+            </table>
+
+
+            <p id="noAdminTransactions" class="no-data">
+                No transactions available.
+            </p>
+
+        </div>
+
+
+        <br>
+
+        <a href="admin-dashboard.html">
+            ← Back to Admin Dashboard
+        </a>
+
+    </main>
+
+
+    <script>
+
+        // Check Admin Login
+
+        const loggedInUser =
+            JSON.parse(localStorage.getItem("currentUser"));
+
+
+        if (!loggedInUser || loggedInUser.role !== "admin") {
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // Logout
+
+        function adminLogout() {
+
+            localStorage.removeItem("currentUser");
+
+            window.location.href = "login.html";
+
+        }
+
+
+        // Get Transactions
+
+        const allTransactions =
+            JSON.parse(localStorage.getItem("transactions")) || [];
+
+
+        const tableBody =
+            document.getElementById("adminTransactionTableBody");
+
+
+        const noTransactions =
+            document.getElementById("noAdminTransactions");
+
+
+        if (allTransactions.length === 0) {
+
+            noTransactions.style.display = "block";
+
+        } else {
+
+            noTransactions.style.display = "none";
+
+
+            allTransactions.forEach(function(transaction, index) {
+
+                const row =
+                    document.createElement("tr");
+
+
+                const category =
+                    transaction.category ||
+                    transaction.source ||
+                    "-";
+
+
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+
+                    <td>${transaction.userEmail || "-"}</td>
+
+                    <td>${transaction.date || "-"}</td>
+
+                    <td>${transaction.type || "-"}</td>
+
+                    <td>${category}</td>
+
+                    <td>
+                        ₹${Number(transaction.amount || 0)
+                            .toLocaleString("en-IN")}
+                    </td>
+
+                    <td>${transaction.description || "-"}</td>
+                `;
+
+
+                tableBody.appendChild(row);
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
