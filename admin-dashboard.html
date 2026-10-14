@@ -1,20 +1,14 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Admin Dashboard - Expense Tracker</title>
 
     <link rel="stylesheet" href="css/style.css">
-
     <link rel="stylesheet" href="css/dashboard.css">
-
 </head>
 
 <body>
@@ -26,17 +20,11 @@
         </div>
 
         <nav>
-
             <span id="adminWelcome"></span>
 
-            <button
-                onclick="adminLogout()"
-                class="logout-btn">
-
+            <button onclick="adminLogout()" class="logout-btn">
                 Logout
-
             </button>
-
         </nav>
 
     </header>
@@ -54,29 +42,20 @@
         <section class="summary-grid">
 
             <div class="summary-card">
-
                 <h3>Total Users</h3>
-
                 <p id="totalUsers">0</p>
-
             </div>
 
 
             <div class="summary-card">
-
                 <h3>Total Transactions</h3>
-
                 <p id="totalTransactions">0</p>
-
             </div>
 
 
             <div class="summary-card">
-
                 <h3>Total Expenses</h3>
-
                 <p id="adminTotalExpenses">₹0</p>
-
             </div>
 
         </section>
@@ -84,9 +63,7 @@
 
         <section class="module-grid">
 
-
-            <a href="admin-users.html"
-                class="module-card">
+            <a href="admin-users.html" class="module-card">
 
                 <h2>👥 Users</h2>
 
@@ -97,8 +74,7 @@
             </a>
 
 
-            <a href="admin-transactions.html"
-                class="module-card">
+            <a href="admin-transactions.html" class="module-card">
 
                 <h2>💰 Transactions</h2>
 
@@ -109,8 +85,7 @@
             </a>
 
 
-            <a href="admin-categories.html"
-                class="module-card">
+            <a href="admin-categories.html" class="module-card">
 
                 <h2>📂 Categories</h2>
 
@@ -120,7 +95,6 @@
 
             </a>
 
-
         </section>
 
     </main>
@@ -128,34 +102,25 @@
 
     <script>
 
-
-        // Show Admin Name
-
+        // Get logged-in user
         const currentUser =
-            JSON.parse(
-                localStorage.getItem("currentUser")
-            );
+            JSON.parse(localStorage.getItem("currentUser"));
 
 
         // Admin-only access
-
-        if (!currentUser ||
-            currentUser.role !== "admin") {
+        if (!currentUser || currentUser.role !== "admin") {
 
             window.location.href = "login.html";
 
         } else {
 
-            document
-                .getElementById("adminWelcome")
-                .textContent =
+            document.getElementById("adminWelcome").textContent =
                 "Welcome, " + currentUser.name;
 
         }
 
 
         // Logout
-
         function adminLogout() {
 
             localStorage.removeItem("currentUser");
@@ -166,64 +131,48 @@
 
 
         // Load Users
-
         const users =
-            JSON.parse(
-                localStorage.getItem("users")
-            ) || [];
+            JSON.parse(localStorage.getItem("users")) || [];
 
 
         const normalUsers =
-            users.filter(function(user) {
+            users.filter(function (user) {
 
                 return user.role === "user";
 
             });
 
 
-        document
-            .getElementById("totalUsers")
-            .textContent =
+        document.getElementById("totalUsers").textContent =
             normalUsers.length;
 
 
         // Load Transactions
-
         const transactions =
-            JSON.parse(
-                localStorage.getItem("transactions")
-            ) || [];
+            JSON.parse(localStorage.getItem("transactions")) || [];
 
 
-        document
-            .getElementById("totalTransactions")
-            .textContent =
+        document.getElementById("totalTransactions").textContent =
             transactions.length;
 
 
         // Calculate Total Expenses
-
         let totalExpenses = 0;
 
 
-        transactions.forEach(function(transaction) {
+        transactions.forEach(function (transaction) {
 
             if (transaction.type === "expense") {
 
-                totalExpenses +=
-                    Number(transaction.amount);
+                totalExpenses += Number(transaction.amount);
 
             }
 
         });
 
 
-        document
-            .getElementById("adminTotalExpenses")
-            .textContent =
-            "₹" +
-            totalExpenses.toLocaleString("en-IN");
-
+        document.getElementById("adminTotalExpenses").textContent =
+            "₹" + totalExpenses.toLocaleString("en-IN");
 
     </script>
 
